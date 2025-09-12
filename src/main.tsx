@@ -12,6 +12,9 @@ import AboutUs from "./pages/AboutUs";
 import Pomodoro from "./pages/Pomodoro";
 import TimeManagement from "./pages/TimeManagement";
 import Categories from "./pages/Categories";
+import Stasticspage from "./pages/Stasticspage";
+import Collaboration from "./pages/Collaborationpage";
+import Habbittracking from "./pages/Habittrackingpage";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -27,6 +30,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         <Route path="/pomodoro" element={<Pomodoro />} />
         <Route path="/time-management" element={<TimeManagement />} />
         <Route path="/categories" element={<Categories />} />
+        <Route path="/statistics" element={<Stasticspage />} />
+        <Route path="/collaboration" element={<Collaboration />} />
+        <Route path="/habbit-tracking" element={<Habbittracking />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
