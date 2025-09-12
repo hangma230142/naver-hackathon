@@ -1,22 +1,22 @@
-import './App.css'
-import hackathonGraphic from './assets/hackathon-graphic.svg'
-import naverLogo from './assets/naver-logo.svg'
+import { Link } from "react-router-dom";
 
 function App() {
   return (
-    <div className="container">
-      <div className="content">
-        <img src={naverLogo} alt="NAVER Vietnam AI Hackathon" className="logo" />
-        
-        <div className="greeting">
-          <p className="hello">Xin chào! 안녕하세요!</p>
-          <p className="subtitle">Hello World</p>
-        </div>
-      </div>
-      
-      <img className="graphic" src={hackathonGraphic} alt="" />
-    </div>
-  )
+    <nav>
+      <ul>
+        <li><Link to="/">Homepage</Link></li>
+        <li><Link to="/product">Product</Link></li>
+        <li><Link to="/calendar">Calendar</Link></li>
+        <li><Link to="/task-details">Task Details</Link></li>
+        <li><Link to="/setting">Setting</Link></li>
+        <li><Link to="/help-center">Help Center</Link></li>
+        <li><Link to="/about-us">About Us</Link></li>
+        <li><Link to="/pomodoro">Pomodoro</Link></li>
+        <li><Link to="/time-management">Time Management</Link></li>
+        <li><Link to="/categories">Categories</Link></li>
+      </ul>
+    </nav>
+  );
 }
 
-export default App
+export default App;
