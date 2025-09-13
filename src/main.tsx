@@ -1,4 +1,3 @@
-// src/main.tsx
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -10,6 +9,7 @@ import Calendar from "./pages/Calendar";
 import Collaborationpage from "./pages/Collaborationpage";
 import Habbittrackingpage from "./pages/Habittrackingpage";
 import Statisticspage from "./pages/Stasticspage";
+import TaskDetails from "./pages/TaskDetails";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +22,7 @@ const router = createBrowserRouter([
       { path: "collaboration", element: <Collaborationpage /> },
       { path: "habit-tracking", element: <Habbittrackingpage /> },
       { path: "statistics", element: <Statisticspage /> },
+      { path: "task-details", element: <TaskDetails /> }
     ],
   },
 ]);
