@@ -4,12 +4,11 @@ import {
   dateFnsLocalizer,
   Event as RBCEvent,
   View,
-  Navigate,
 } from "react-big-calendar";
 import { format, parse, startOfWeek, getDay } from "date-fns";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import axios from "axios";
-import type { AxiosResponse } from "axios"; // 👈 import type riêng
+import type { AxiosResponse } from "axios";
 
 // Localizer cơ bản
 const localizer = dateFnsLocalizer({
@@ -35,7 +34,7 @@ function CustomToolbar({
   onView,
 }: {
   label: string;
-  onNavigate: (action: "PREV" | "NEXT" | "TODAY" | "DATE") => void; // 👈 sửa type
+  onNavigate: (action: "PREV" | "NEXT" | "TODAY" | "DATE") => void;
   onView: (view: View) => void;
 }) {
   return (
@@ -77,6 +76,12 @@ function CustomToolbar({
         >
           Week
         </button>
+        <button
+          onClick={() => onView("day")}
+          className="px-3 py-1 rounded-lg border bg-white hover:bg-gray-100"
+        >
+          Day
+        </button>
       </div>
     </div>
   );
@@ -91,7 +96,7 @@ export default function CalendarView() {
     axios
       .get("http://localhost:4000/products")
       .then((res: AxiosResponse<any>) => {
-        const tasks = res.data.flatMap((p: any) => p.tasks);
+        const tasks = res.data.flatMap((p: any) => p.tasks || []);
 
         const formatted: TaskEvent[] = tasks
           .filter((t: any) => t.deadline)
@@ -104,7 +109,7 @@ export default function CalendarView() {
 
         setEvents(formatted);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.error("❌ Error fetching tasks:", err));
   }, []);
 
   return (

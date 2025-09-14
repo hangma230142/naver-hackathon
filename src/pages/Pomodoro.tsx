@@ -1,55 +1,50 @@
-// src/pages/Pomodoro.tsx
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-const Pomodoro: React.FC = () => {
-  const [time, setTime] = useState(25 * 60); // 25 phút
-  const [isRunning, setIsRunning] = useState(false);
+export default function Pomodoro() {
+  const [sessions, setSessions] = useState<any[]>([]);
+  const [task, setTask] = useState("");
+  const [duration, setDuration] = useState(25);
 
   useEffect(() => {
-    let timer: NodeJS.Timeout;
-    if (isRunning && time > 0) {
-      timer = setInterval(() => setTime((t) => t - 1), 1000);
-    }
-    return () => clearInterval(timer);
-  }, [isRunning, time]);
+    axios.get("http://localhost:4000/api/pomodoro").then((res) => {
+      setSessions(res.data);
+    });
+  }, []);
 
-  const reset = () => {
-    setTime(25 * 60);
-    setIsRunning(false);
-  };
-
-  const formatTime = (sec: number) => {
-    const m = Math.floor(sec / 60);
-    const s = sec % 60;
-    return `${m}:${s < 10 ? "0" : ""}${s}`;
+  const addSession = () => {
+    const newSession = {
+      task,
+      duration,
+      date: new Date().toISOString().slice(0, 10),
+    };
+    axios
+      .post("http://localhost:4000/api/pomodoro", newSession)
+      .then((res) => setSessions([...sessions, res.data]));
   };
 
   return (
-    <div className="p-6 text-center">
-      <h1 className="text-2xl font-bold mb-4">Pomodoro Timer</h1>
-      <div className="text-4xl font-mono mb-4">{formatTime(time)}</div>
-      <div className="space-x-2">
-        <button
-          onClick={() => setIsRunning(true)}
-          className="bg-green-500 px-4 py-2 rounded text-white"
-        >
-          Start
-        </button>
-        <button
-          onClick={() => setIsRunning(false)}
-          className="bg-yellow-500 px-4 py-2 rounded text-white"
-        >
-          Pause
-        </button>
-        <button
-          onClick={reset}
-          className="bg-red-500 px-4 py-2 rounded text-white"
-        >
-          Reset
-        </button>
-      </div>
+    <div>
+      <h1 className="text-2xl font-bold">⏳ Pomodoro</h1>
+      <ul>
+        {sessions.map((s) => (
+          <li key={s.id}>
+            {s.task} - {s.duration} mins on {s.date}
+          </li>
+        ))}
+      </ul>
+
+      <input
+        placeholder="Task"
+        value={task}
+        onChange={(e) => setTask(e.target.value)}
+      />
+      <input
+        type="number"
+        value={duration}
+        onChange={(e) => setDuration(Number(e.target.value))}
+      />
+      <button onClick={addSession}>Start</button>
     </div>
   );
-};
-
-export default Pomodoro;
+}
