@@ -51,8 +51,10 @@ export const ProductivityDashboard = ({ tasks }: ProductivityDashboardProps) => 
       value: count,
       percentage: (count / tasks.length) * 100 || 0,
       color: priority === 'urgent' ? 'bg-destructive' :
-             priority === 'high' ? 'bg-red-500' :
-             priority === 'medium' ? 'bg-warning' : 'bg-success'
+             priority === 'high'   ? 'bg-red-500' :
+             priority === 'medium' ? 'bg-yellow-500 text-white' :
+             priority === 'low'    ? 'bg-green-500 text-white' :
+             'bg-muted'
     }));
   }, [tasks]);
 
@@ -129,7 +131,6 @@ export const ProductivityDashboard = ({ tasks }: ProductivityDashboardProps) => 
 
       {/* Charts Row */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Daily Progress */}
         <Card className="p-6">
           <div className="flex items-center gap-2 mb-4">
             <Calendar className="w-5 h-5 text-primary" />

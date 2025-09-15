@@ -65,8 +65,8 @@ export const TaskCalendar = ({ tasks, onTaskClick, onDateClick, onCreateTask, se
     switch (priority) {
       case 'urgent': return 'bg-destructive';
       case 'high': return 'bg-red-500';
-      case 'medium': return 'bg-warning';
-      case 'low': return 'bg-success';
+      case 'medium': return 'bg-yellow-300';
+      case 'low': return 'bg-green-400';
       default: return 'bg-muted';
     }
   };
@@ -337,19 +337,19 @@ export const TaskCalendar = ({ tasks, onTaskClick, onDateClick, onCreateTask, se
         <h4 className="font-medium mb-3">Legend</h4>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 bg-destructive rounded-full" />
+            <div className="w-3 h-3 bg-red-500 rounded-full" />
             <span>Urgent Priority</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 bg-red-500 rounded-full" />
+            <div className="w-3 h-3 bg-red-400 rounded-full" />
             <span>High Priority</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 bg-warning rounded-full" />
+            <div className="w-3 h-3 bg-yellow-300 rounded-full" />
             <span>Medium Priority</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 bg-success rounded-full" />
+            <div className="w-3 h-3 bg-green-400 rounded-full" />
             <span>Low Priority</span>
           </div>
         </div>
