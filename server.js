@@ -3,10 +3,9 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin: "http://localhost:8080" }));
 app.use(express.json());
 
-// ===== Fake DB =====
 let products = [
   { id: 1, name: "Laptop", description: "Macbook Pro" },
   { id: 2, name: "Phone", description: "iPhone 15" },
@@ -25,8 +24,6 @@ let pomodoro = [
   { id: 1, task: "Study Math", duration: 25, date: "2025-09-12" },
 ];
 
-// ===== ROUTES =====
-
 // --- Products ---
 app.get("/api/products", (req, res) => res.json(products));
 app.post("/api/products", (req, res) => {
@@ -39,7 +36,7 @@ app.put("/api/products/:id", (req, res) => {
   products = products.map((p) =>
     p.id == id ? { ...p, ...req.body } : p
   );
-  res.json({ message: "Updated" });
+  res.json(products.find((p) => p.id == id));
 });
 app.delete("/api/products/:id", (req, res) => {
   const { id } = req.params;
@@ -47,12 +44,26 @@ app.delete("/api/products/:id", (req, res) => {
   res.json({ message: "Deleted" });
 });
 
-// --- Tasks / Calendar ---
 app.get("/api/tasks", (req, res) => res.json(tasks));
+app.get("/api/tasks/:id", (req, res) => {
+  const task = tasks.find((t) => t.id == req.params.id);
+  if (task) res.json(task);
+  else res.status(404).json({ message: "Task not found" });
+});
 app.post("/api/tasks", (req, res) => {
-  const newTask = { id: Date.now(), ...req.body };
+  const newTask = { id: Date.now().toString(), ...req.body };
   tasks.push(newTask);
   res.json(newTask);
+});
+app.put("/api/tasks/:id", (req, res) => {
+  const { id } = req.params;
+  tasks = tasks.map((t) => (t.id == id ? { ...t, ...req.body } : t));
+  res.json(tasks.find((t) => t.id == id));
+});
+app.delete("/api/tasks/:id", (req, res) => {
+  const { id } = req.params;
+  tasks = tasks.filter((t) => t.id != id);
+  res.json({ message: "Deleted" });
 });
 
 // --- Habits ---
@@ -68,15 +79,24 @@ app.patch("/api/habits/:id", (req, res) => {
   habits = habits.map((h) =>
     h.id == id ? { ...h, progress: [...h.progress, date] } : h
   );
-  res.json({ message: "Progress updated" });
+  res.json(habits.find((h) => h.id == id));
+});
+app.delete("/api/habits/:id", (req, res) => {
+  const { id } = req.params;
+  habits = habits.filter((h) => h.id != id);
+  res.json({ message: "Deleted" });
 });
 
-// --- Pomodoro ---
 app.get("/api/pomodoro", (req, res) => res.json(pomodoro));
 app.post("/api/pomodoro", (req, res) => {
   const newSession = { id: Date.now(), ...req.body };
   pomodoro.push(newSession);
   res.json(newSession);
+});
+app.delete("/api/pomodoro/:id", (req, res) => {
+  const { id } = req.params;
+  pomodoro = pomodoro.filter((p) => p.id != id);
+  res.json({ message: "Deleted" });
 });
 
 // ===== Start =====

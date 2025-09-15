@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { CheckCircle2, Timer, Calendar, BarChart3, Settings, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { useNavigate } from 'react-router-dom';
 
 interface HeaderProps {
   activeView: string;
@@ -15,6 +16,8 @@ interface HeaderProps {
 }
 
 export const Header = ({ activeView, onViewChange, onCreateTask, taskStats }: HeaderProps) => {
+  const navigate = useNavigate();
+
   const navItems = [
     { id: 'tasks', label: 'Tasks', icon: CheckCircle2 },
     { id: 'timer', label: 'Timer', icon: Timer },
@@ -26,13 +29,15 @@ export const Header = ({ activeView, onViewChange, onCreateTask, taskStats }: He
     <header className="sticky top-0 z-50 w-full border-b bg-gradient-card backdrop-blur-sm">
       <div className="container flex h-16 items-center justify-between px-4">
         <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2">
+          <div 
+            className="flex items-center gap-2 cursor-pointer hover-scale"
+            onClick={() => navigate('/')}
+          >
             <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
               <CheckCircle2 className="w-5 h-5 text-white" />
             </div>
             <h1 className="text-xl font-bold text-primary">DuckDoneList</h1>
           </div>
-
           <nav className="hidden md:flex items-center gap-1">
             {navItems.map((item) => {
               const Icon = item.icon;
@@ -57,7 +62,6 @@ export const Header = ({ activeView, onViewChange, onCreateTask, taskStats }: He
             })}
           </nav>
         </div>
-
         <div className="flex items-center gap-4">
           <div className="hidden sm:flex items-center gap-2">
             <Badge variant="secondary" className="text-xs">
@@ -69,7 +73,6 @@ export const Header = ({ activeView, onViewChange, onCreateTask, taskStats }: He
               </Badge>
             )}
           </div>
-
           <Button
             onClick={onCreateTask}
             size="sm"
@@ -78,7 +81,6 @@ export const Header = ({ activeView, onViewChange, onCreateTask, taskStats }: He
             <Plus className="w-4 h-4 mr-1" />
             New Task
           </Button>
-
           <Button variant="ghost" size="sm">
             <Settings className="w-4 h-4" />
           </Button>

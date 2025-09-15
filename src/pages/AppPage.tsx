@@ -1,4 +1,5 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Task, TaskCategory, TaskStatus, TaskPriority } from '@/types/task';
 import { useTasks } from '@/hooks/useTasks';
 import { Header } from '@/components/layout/Header';
@@ -15,11 +16,20 @@ import { toast } from '@/hooks/use-toast';
 import { Plus, Timer, CheckCircle2, Calendar, BarChart3 } from 'lucide-react';
 
 const AppPage = () => {
+  const [searchParams] = useSearchParams();
   const [activeView, setActiveView] = useState('tasks');
   const [isTaskFormOpen, setIsTaskFormOpen] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | undefined>();
   const [selectedTaskForTimer, setSelectedTaskForTimer] = useState<Task | undefined>();
   const [selectedCalendarDate, setSelectedCalendarDate] = useState<Date | undefined>();
+
+  // Handle URL parameters to set the initial view
+  useEffect(() => {
+    const viewParam = searchParams.get('view');
+    if (viewParam && ['tasks', 'timer', 'calendar', 'analytics'].includes(viewParam)) {
+      setActiveView(viewParam);
+    }
+  }, [searchParams]);
 
   const {
     tasks,
@@ -192,6 +202,7 @@ const AppPage = () => {
               tasks={allTasks.filter(task => task.dueDate)}
               onTaskClick={handleCalendarTaskClick}
               onDateClick={handleCalendarDateClick}
+              onCreateTask={handleCreateTask}
               selectedDate={selectedCalendarDate}
             />
           </div>

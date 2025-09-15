@@ -11,10 +11,11 @@ interface TaskCalendarProps {
   tasks: Task[];
   onTaskClick: (task: Task) => void;
   onDateClick: (date: Date) => void;
+  onCreateTask: (selectedDate?: Date) => void;
   selectedDate?: Date;
 }
 
-export const TaskCalendar = ({ tasks, onTaskClick, onDateClick, selectedDate }: TaskCalendarProps) => {
+export const TaskCalendar = ({ tasks, onTaskClick, onDateClick, onCreateTask, selectedDate }: TaskCalendarProps) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [view, setView] = useState<'month' | 'week'>('month');
 
@@ -196,7 +197,7 @@ export const TaskCalendar = ({ tasks, onTaskClick, onDateClick, selectedDate }: 
             </h3>
             <Button
               size="sm"
-              onClick={() => onDateClick(selectedDate)}
+              onClick={() => onCreateTask(selectedDate)}
               className="bg-gradient-primary"
             >
               <Plus className="w-4 h-4 mr-1" />

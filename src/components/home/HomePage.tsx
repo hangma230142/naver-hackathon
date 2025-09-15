@@ -84,7 +84,10 @@ export const HomePage = () => {
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b bg-gradient-card backdrop-blur-sm">
         <div className="container flex h-16 items-center justify-between px-4">
-          <div className="flex items-center gap-2">
+          <div 
+            className="flex items-center gap-2 cursor-pointer hover-scale"
+            onClick={() => navigate('/')}
+          >
             <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
               <CheckCircle2 className="w-5 h-5 text-white" />
             </div>
@@ -130,7 +133,10 @@ export const HomePage = () => {
             </p>
 
             <div className="grid md:grid-cols-3 gap-6 mb-12 text-left">
-              <Card className="p-6 hover:shadow-card transition-all duration-200">
+              <Card 
+                className="p-6 hover:shadow-card transition-all duration-200 cursor-pointer hover:scale-105"
+                onClick={() => navigate('/app?view=tasks')}
+              >
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
                     <span className="text-white font-bold">1</span>
@@ -142,7 +148,10 @@ export const HomePage = () => {
                 </p>
               </Card>
 
-              <Card className="p-6 hover:shadow-card transition-all duration-200">
+              <Card 
+                className="p-6 hover:shadow-card transition-all duration-200 cursor-pointer hover:scale-105"
+                onClick={() => navigate('/app?view=timer')}
+              >
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-8 h-8 bg-gradient-warning rounded-lg flex items-center justify-center">
                     <span className="text-white font-bold">2</span>
@@ -154,7 +163,10 @@ export const HomePage = () => {
                 </p>
               </Card>
 
-              <Card className="p-6 hover:shadow-card transition-all duration-200">
+              <Card 
+                className="p-6 hover:shadow-card transition-all duration-200 cursor-pointer hover:scale-105"
+                onClick={() => navigate('/app?view=analytics')}
+              >
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-8 h-8 bg-gradient-success rounded-lg flex items-center justify-center">
                     <span className="text-white font-bold">3</span>
@@ -345,7 +357,7 @@ export const HomePage = () => {
             <span className="font-semibold">DuckDoneList</span>
           </div>
           <p className="text-sm">
-            Smart productivity hub for modern achievers. Built with ❤️ for getting things done.
+            Smart productivity hub for modern achievers. Built with for getting things done.
           </p>
         </div>
       </footer>

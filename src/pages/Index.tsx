@@ -80,13 +80,13 @@ const Index = () => {
     if (editingTask) {
       updateTask(editingTask.id, taskData);
       toast({
-        title: "Task updated! ✏️",
+        title: "Task updated!",
         description: `"${taskData.title}" has been updated successfully.`,
       });
     } else {
       createTask(taskData);
       toast({
-        title: "Task created! 🎉",
+        title: "Task created!",
         description: `"${taskData.title}" has been added to your list.`,
       });
     }
@@ -98,7 +98,7 @@ const Index = () => {
     const task = allTasks.find(t => t.id === taskId);
     deleteTask(taskId);
     toast({
-      title: "Task deleted! 🗑️",
+      title: "Task deleted!",
       description: `"${task?.title}" has been removed from your list.`,
       variant: "destructive"
     });
@@ -192,6 +192,7 @@ const Index = () => {
               tasks={allTasks.filter(task => task.dueDate)}
               onTaskClick={handleCalendarTaskClick}
               onDateClick={handleCalendarDateClick}
+              onCreateTask={handleCreateTask}
               selectedDate={selectedCalendarDate}
             />
           </div>
