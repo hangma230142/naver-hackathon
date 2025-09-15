@@ -1,5 +1,16 @@
 import { useState, useMemo } from 'react';
-import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameDay, isToday, addMonths, subMonths } from 'date-fns';
+import { 
+  format, 
+  startOfMonth, 
+  endOfMonth, 
+  eachDayOfInterval, 
+  isSameDay, 
+  isToday, 
+  addMonths, 
+  subMonths, 
+  startOfWeek, 
+  endOfWeek 
+} from 'date-fns';
 import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, Plus } from 'lucide-react';
 import { Task } from '@/types/task';
 import { Button } from '@/components/ui/button';
@@ -22,6 +33,10 @@ export const TaskCalendar = ({ tasks, onTaskClick, onDateClick, onCreateTask, se
   const monthStart = startOfMonth(currentDate);
   const monthEnd = endOfMonth(currentDate);
   const monthDays = eachDayOfInterval({ start: monthStart, end: monthEnd });
+
+  const weekStart = startOfWeek(currentDate, { weekStartsOn: 0 }); // Sunday
+  const weekEnd = endOfWeek(currentDate, { weekStartsOn: 0 });
+  const weekDays = eachDayOfInterval({ start: weekStart, end: weekEnd });
 
   const tasksByDate = useMemo(() => {
     return tasks.reduce((acc, task) => {
@@ -116,76 +131,140 @@ export const TaskCalendar = ({ tasks, onTaskClick, onDateClick, onCreateTask, se
         </div>
 
         {/* Calendar Grid */}
-        <div className="grid grid-cols-7 gap-px bg-border rounded-lg overflow-hidden">
-          {/* Day Headers */}
-          {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-            <div key={day} className="bg-muted p-2 text-center text-sm font-medium">
-              {day}
-            </div>
-          ))}
-
-          {/* Calendar Days */}
-          {monthDays.map((date, index) => {
-            const dayTasks = getDayTasks(date);
-            const isSelected = selectedDate && isSameDay(date, selectedDate);
-            const isCurrentDay = isToday(date);
-            const isOverdue = isDateOverdue(date, dayTasks);
-
-            return (
-              <div
-                key={index}
-                onClick={() => onDateClick(date)}
-                className={cn(
-                  "bg-card p-2 min-h-[80px] cursor-pointer hover:bg-muted/50 transition-colors",
-                  isSelected && "bg-primary/10 border-2 border-primary",
-                  isCurrentDay && "bg-accent/20",
-                  isOverdue && "bg-destructive/10"
-                )}
-              >
-                <div className="flex items-center justify-between mb-1">
-                  <span className={cn(
-                    "text-sm font-medium",
-                    isCurrentDay && "text-primary font-bold",
-                    isOverdue && "text-destructive"
-                  )}>
-                    {format(date, 'd')}
-                  </span>
-                  {dayTasks.length > 0 && (
-                    <Badge variant="outline" className="text-xs">
-                      {dayTasks.length}
-                    </Badge>
-                  )}
-                </div>
-
-                {/* Task Indicators */}
-                <div className="space-y-1">
-                  {dayTasks.slice(0, 3).map((task, taskIndex) => (
-                    <div
-                      key={taskIndex}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onTaskClick(task);
-                      }}
-                      className={cn(
-                        "text-xs p-1 rounded truncate cursor-pointer hover:opacity-80",
-                        getTaskPriorityColor(task.priority),
-                        "text-white"
-                      )}
-                      title={task.title}
-                    >
-                      {task.title}
-                    </div>
-                  ))}
-                  {dayTasks.length > 3 && (
-                    <div className="text-xs text-muted-foreground text-center">
-                      +{dayTasks.length - 3} more
-                    </div>
-                  )}
-                </div>
+        {view === 'month' ? (
+          <div className="grid grid-cols-7 gap-px bg-border rounded-lg overflow-hidden">
+            {/* Day Headers */}
+            {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+              <div key={day} className="bg-muted p-2 text-center text-sm font-medium">
+                {day}
               </div>
-            );
-          })}
-        </div>
+            ))}
+
+            {/* Month Days */}
+            {monthDays.map((date, index) => {
+              const dayTasks = getDayTasks(date);
+              const isSelected = selectedDate && isSameDay(date, selectedDate);
+              const isCurrentDay = isToday(date);
+              const isOverdue = isDateOverdue(date, dayTasks);
+
+              return (
+                <div
+                  key={index}
+                  onClick={() => onDateClick(date)}
+                  className={cn(
+                    "bg-card p-2 min-h-[80px] cursor-pointer hover:bg-muted/50 transition-colors",
+                    isSelected && "bg-primary/10 border-2 border-primary",
+                    isCurrentDay && "bg-accent/20",
+                    isOverdue && "bg-destructive/10"
+                  )}
+                >
+                  <div className="flex items-center justify-between mb-1">
+                    <span className={cn(
+                      "text-sm font-medium",
+                      isCurrentDay && "text-primary font-bold",
+                      isOverdue && "text-destructive"
+                    )}>
+                      {format(date, 'd')}
+                    </span>
+                    {dayTasks.length > 0 && (
+                      <Badge variant="outline" className="text-xs">
+                        {dayTasks.length}
+                      </Badge>
+                    )}
+                  </div>
+                  <div className="space-y-1">
+                    {dayTasks.slice(0, 3).map((task, taskIndex) => (
+                      <div
+                        key={taskIndex}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onTaskClick(task);
+                        }}
+                        className={cn(
+                          "text-xs p-1 rounded truncate cursor-pointer hover:opacity-80",
+                          getTaskPriorityColor(task.priority),
+                          "text-white"
+                        )}
+                        title={task.title}
+                      >
+                        {task.title}
+                      </div>
+                    ))}
+                    {dayTasks.length > 3 && (
+                      <div className="text-xs text-muted-foreground text-center">
+                        +{dayTasks.length - 3} more
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="grid grid-cols-7 gap-px bg-border rounded-lg overflow-hidden">
+            {/* Day Headers */}
+            {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+              <div key={day} className="bg-muted p-2 text-center text-sm font-medium">
+                {day}
+              </div>
+            ))}
+
+            {/* Week Days */}
+            {weekDays.map((date, index) => {
+              const dayTasks = getDayTasks(date);
+              const isSelected = selectedDate && isSameDay(date, selectedDate);
+              const isCurrentDay = isToday(date);
+              const isOverdue = isDateOverdue(date, dayTasks);
+
+              return (
+                <div
+                  key={index}
+                  onClick={() => onDateClick(date)}
+                  className={cn(
+                    "bg-card p-4 min-h-[120px] cursor-pointer hover:bg-muted/50 transition-colors",
+                    isSelected && "bg-primary/10 border-2 border-primary",
+                    isCurrentDay && "bg-accent/20",
+                    isOverdue && "bg-destructive/10"
+                  )}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <span className={cn(
+                      "text-sm font-medium",
+                      isCurrentDay && "text-primary font-bold",
+                      isOverdue && "text-destructive"
+                    )}>
+                      {format(date, 'EEE d')}
+                    </span>
+                    {dayTasks.length > 0 && (
+                      <Badge variant="outline" className="text-xs">
+                        {dayTasks.length}
+                      </Badge>
+                    )}
+                  </div>
+                  <div className="space-y-1">
+                    {dayTasks.map((task, taskIndex) => (
+                      <div
+                        key={taskIndex}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onTaskClick(task);
+                        }}
+                        className={cn(
+                          "text-xs p-1 rounded truncate cursor-pointer hover:opacity-80",
+                          getTaskPriorityColor(task.priority),
+                          "text-white"
+                        )}
+                        title={task.title}
+                      >
+                        {task.title}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </Card>
 
       {/* Selected Date Tasks */}
