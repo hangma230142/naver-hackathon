@@ -298,33 +298,7 @@ export const HomePage = () => {
             })}
           </div>
         </section>
-
-        {/* Stats Section */}
-        <section className="py-20">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Trusted by Thousands</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Join the community of productive individuals who've transformed their workflow
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => {
-              const Icon = stat.icon;
-              
-              return (
-                <Card key={index} className="p-6 text-center hover:shadow-md transition-all">
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <Icon className="w-6 h-6 text-blue-500" />
-                  </div>
-                  <div className="text-3xl font-bold text-blue-500 mb-2">{stat.value}</div>
-                  <div className="text-sm text-muted-foreground">{stat.label}</div>
-                </Card>
-              );
-            })}
-          </div>
-        </section>
-
+        
         {/* CTA Section */}
         <section className="py-20 text-center">
           <Card className="p-12 bg-gradient-to-r from-blue-500 to-cyan-500 text-white">
