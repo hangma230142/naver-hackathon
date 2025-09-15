@@ -159,37 +159,62 @@ export const HomePage = () => {
           </div>
 
           <div className="grid lg:grid-cols-3 gap-8">
-            {features.map((feature) => {
-              const Icon = feature.icon;
-              const isHovered = hoveredFeature === feature.id;
-              
-              return (
-                <Card 
-                  key={feature.id}
-                  className={`p-6 transition-all duration-300 cursor-pointer ${
-                    isHovered ? 'scale-105 shadow-lg' : 'hover:shadow-md'
-                  }`}
-                  onMouseEnter={() => setHoveredFeature(feature.id)}
-                  onMouseLeave={() => setHoveredFeature(null)}
-                >
-                  <div className={`w-16 h-16 bg-gradient-to-r ${feature.color} rounded-xl flex items-center justify-center mb-6`}>
-                    <Icon className="w-8 h-8 text-white" />
-                  </div>
+            <Card
+              className="p-6 transition-all duration-300 cursor-pointer hover:scale-105 hover:shadow-lg"
+              onClick={() => navigate('/app?view=tasks')}
+            >
+              <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center mb-6">
+                <CheckCircle2 className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Task Management</h3>
+              <p className="text-muted-foreground mb-6">
+                Create, organize, and track tasks with smart categorization
+              </p>
+              <ul className="space-y-2">
+                <li className="flex items-center gap-2 text-sm"><div className="w-2 h-2 bg-blue-500 rounded-full" />Smart task categorization</li>
+                <li className="flex items-center gap-2 text-sm"><div className="w-2 h-2 bg-blue-500 rounded-full" />Priority-based organization</li>
+                <li className="flex items-center gap-2 text-sm"><div className="w-2 h-2 bg-blue-500 rounded-full" />Subtask management</li>
+                <li className="flex items-center gap-2 text-sm"><div className="w-2 h-2 bg-blue-500 rounded-full" />Template for task management</li>
+              </ul>
+            </Card>
 
-                  <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-                  <p className="text-muted-foreground mb-6">{feature.description}</p>
+            <Card
+              className="p-6 transition-all duration-300 cursor-pointer hover:scale-105 hover:shadow-lg"
+              onClick={() => navigate('/app?view=timer')}
+            >
+              <div className="w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center mb-6">
+                <Timer className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Time Management</h3>
+              <p className="text-muted-foreground mb-6">
+                Pomodoro timer with productivity tracking and insights
+              </p>
+              <ul className="space-y-2">
+                <li className="flex items-center gap-2 text-sm"><div className="w-2 h-2 bg-yellow-400 rounded-full" />Pomodoro technique integration</li>
+                <li className="flex items-center gap-2 text-sm"><div className="w-2 h-2 bg-yellow-400 rounded-full" />Due dates & deadlines</li>
+                <li className="flex items-center gap-2 text-sm"><div className="w-2 h-2 bg-yellow-400 rounded-full" />Weekly and monthly calendar view</li>
+                <li className="flex items-center gap-2 text-sm"><div className="w-2 h-2 bg-yellow-400 rounded-full" />Time tracking & reminders</li>
+              </ul>
+            </Card>
 
-                  <ul className="space-y-2">
-                    {feature.details.map((detail, index) => (
-                      <li key={index} className="flex items-center gap-2 text-sm">
-                        <div className="w-2 h-2 bg-blue-500 rounded-full" />
-                        {detail}
-                      </li>
-                    ))}
-                  </ul>
-                </Card>
-              );
-            })}
+            <Card
+              className="p-6 transition-all duration-300 cursor-pointer hover:scale-105 hover:shadow-lg"
+              onClick={() => navigate('/app?view=analytics')}
+            >
+              <div className="w-16 h-16 bg-gradient-to-r from-green-400 to-emerald-500 rounded-xl flex items-center justify-center mb-6">
+                <BarChart3 className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Analytics & Insights</h3>
+              <p className="text-muted-foreground mb-6">
+                Track habits and analyze productivity patterns
+              </p>
+              <ul className="space-y-2">
+                <li className="flex items-center gap-2 text-sm"><div className="w-2 h-2 bg-green-400 rounded-full" />Productivity analytics</li>
+                <li className="flex items-center gap-2 text-sm"><div className="w-2 h-2 bg-green-400 rounded-full" />Habit tracking extensions</li>
+                <li className="flex items-center gap-2 text-sm"><div className="w-2 h-2 bg-green-400 rounded-full" />Performance insights</li>
+                <li className="flex items-center gap-2 text-sm"><div className="w-2 h-2 bg-green-400 rounded-full" />Progress visualization</li>
+              </ul>
+            </Card>
           </div>
         </section>
 
