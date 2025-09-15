@@ -6,7 +6,7 @@ import { TaskCard } from '@/components/tasks/TaskCard';
 import { TaskForm } from '@/components/tasks/TaskForm';
 import { TaskFilters } from '@/components/tasks/TaskFilters';
 import { PomodoroTimer } from '@/components/timer/PomodoroTimer';
-import { TaskCalendar } from '@/components/calendar/TaskCalendar';
+import { TaskCalendar } from '@/components/Calendar/TaskCalendar';
 import { ProductivityDashboard } from '@/components/analytics/ProductivityDashboard';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';

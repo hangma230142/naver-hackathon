@@ -7,7 +7,7 @@ import { TaskCard } from '@/components/tasks/TaskCard';
 import { TaskForm } from '@/components/tasks/TaskForm';
 import { TaskFilters } from '@/components/tasks/TaskFilters';
 import { PomodoroTimer } from '@/components/timer/PomodoroTimer';
-import { TaskCalendar } from '@/components/calendar/TaskCalendar';
+import { TaskCalendar } from '@/components/Calendar/TaskCalendar';
 import { ProductivityDashboard } from '@/components/analytics/ProductivityDashboard';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -90,13 +90,13 @@ const AppPage = () => {
     if (editingTask) {
       updateTask(editingTask.id, taskData);
       toast({
-        title: "Task updated! ✏️",
+        title: "Task updated!",
         description: `"${taskData.title}" has been updated successfully.`,
       });
     } else {
       createTask(taskData);
       toast({
-        title: "Task created! 🎉",
+        title: "Task created!",
         description: `"${taskData.title}" has been added to your list.`,
       });
     }
@@ -108,7 +108,7 @@ const AppPage = () => {
     const task = allTasks.find(t => t.id === taskId);
     deleteTask(taskId);
     toast({
-      title: "Task deleted! 🗑️",
+      title: "Task deleted!",
       description: `"${task?.title}" has been removed from your list.`,
       variant: "destructive"
     });
@@ -119,13 +119,13 @@ const AppPage = () => {
     if (task?.status === 'completed') {
       updateTask(taskId, { status: 'todo', completedAt: undefined });
       toast({
-        title: "Task reopened! 🔄",
+        title: "Task reopened!",
         description: `"${task.title}" is back in your todo list.`,
       });
     } else {
       completeTask(taskId);
       toast({
-        title: "Task completed! ✅",
+        title: "Task completed!",
         description: `Great job finishing "${task?.title}"!`,
       });
     }
