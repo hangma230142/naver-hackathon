@@ -126,7 +126,7 @@ export const HomePage = () => {
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-8">
             DuckDoneList is your all-in-one productivity companion. 
             Create and manage tasks, track your time with Pomodoro, 
-            and unlock insights to improve your workflow — 
+            and unlock insights to improve your workflow -
             everything you need to stay organized and achieve more.
           </p>
 
