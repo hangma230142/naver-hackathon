@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { 
   CheckCircle2, 
   Timer, 
-  Calendar, 
   BarChart3,
   ArrowRight,
   Play,
@@ -101,9 +100,6 @@ export const HomePage = () => {
             <a href="#categories" className="text-sm font-medium text-muted-foreground hover:text-blue-500 transition-colors">
               Categories
             </a>
-            <a href="#about" className="text-sm font-medium text-muted-foreground hover:text-blue-500 transition-colors">
-              About
-            </a>
           </nav>
 
           <Button 
@@ -118,109 +114,38 @@ export const HomePage = () => {
 
       <main className="container mx-auto px-4">
         {/* Hero Section */}
-        <section className="py-20 text-center">
-          <div className="max-w-4xl mx-auto">
-            <Badge className="mb-6 bg-blue-100 text-blue-500 border-blue-200">
-              Smart Productivity Hub
-            </Badge>
-            
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
-              Hi, I'm Duck and I'm here to help you
-            </h1>
-            
-            <p className="text-xl md:text-2xl text-muted-foreground mb-4">
-              Here's what I have
-            </p>
+        <section className="h-screen flex flex-col items-center justify-center text-center">
+          <Badge className="mb-6 bg-blue-100 text-blue-500 border-blue-200">
+            Smart Productivity Hub
+          </Badge>
+          
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+            Hi, I'm Duck and I'm here to help you
+          </h1>
+          
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-8">
+            DuckDoneList is your all-in-one productivity companion. 
+            Create and manage tasks, track your time with Pomodoro, 
+            and unlock insights to improve your workflow — 
+            everything you need to stay organized and achieve more.
+          </p>
 
-            <div className="grid md:grid-cols-3 gap-6 mb-12 text-left">
-              <Card 
-                className="p-6 hover:shadow-lg transition-all duration-200 cursor-pointer hover:scale-105"
-                onClick={() => navigate('/app?view=tasks')}
-              >
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center">
-                    <span className="text-white font-bold">1</span>
-                  </div>
-                  <h3 className="font-semibold">Task Management</h3>
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  Organize and prioritize your tasks efficiently
-                </p>
-              </Card>
-
-              <Card 
-                className="p-6 hover:shadow-lg transition-all duration-200 cursor-pointer hover:scale-105"
-                onClick={() => navigate('/app?view=timer')}
-              >
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-8 h-8 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center">
-                    <span className="text-white font-bold">2</span>
-                  </div>
-                  <h3 className="font-semibold">Time Management</h3>
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  Track time and boost productivity with Pomodoro
-                </p>
-              </Card>
-
-              <Card 
-                className="p-6 hover:shadow-lg transition-all duration-200 cursor-pointer hover:scale-105"
-                onClick={() => navigate('/app?view=analytics')}
-              >
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-8 h-8 bg-gradient-to-r from-green-400 to-emerald-500 rounded-lg flex items-center justify-center">
-                    <span className="text-white font-bold">3</span>
-                  </div>
-                  <h3 className="font-semibold">Tracking your habits/life style</h3>
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  Analyze patterns and improve your workflow
-                </p>
-              </Card>
-            </div>
-
-            <div className="mb-12">
-              <h2 className="text-2xl font-bold mb-6">Why you should choose me</h2>
-              <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-                <Card className="p-6 text-left">
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-                    <Smartphone className="w-6 h-6 text-green-500" />
-                  </div>
-                  <h3 className="font-semibold mb-2">Smart & Intuitive</h3>
-                  <p className="text-sm text-muted-foreground">
-                    AI-powered task prioritization and productivity insights that learn from your habits
-                  </p>
-                </Card>
-
-                <Card className="p-6 text-left">
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                    <TrendingUp className="w-6 h-6 text-blue-500" />
-                  </div>
-                  <h3 className="font-semibold mb-2">Proven Results</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Users report 85% productivity improvement with our procrastination-aware system
-                  </p>
-                </Card>
-              </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
-                onClick={() => navigate('/app')}
-                className="bg-gradient-to-r from-blue-500 to-cyan-500 shadow-md hover:shadow-lg transition-all duration-200 px-8"
-              >
-                <Play className="w-5 h-5 mr-2" />
-                Start Your Productivity Journey
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline"
-                onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                Learn More
-              </Button>
-            </div>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              size="lg" 
+              onClick={() => navigate('/app')}
+              className="bg-gradient-to-r from-blue-500 to-cyan-500 shadow-md hover:shadow-lg transition-all duration-200 px-8"
+            >
+              <Play className="w-5 h-5 mr-2" />
+              Start Your Productivity Journey
+            </Button>
+            <Button 
+              size="lg" 
+              variant="outline"
+              onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              Learn More
+            </Button>
           </div>
         </section>
 
@@ -229,7 +154,7 @@ export const HomePage = () => {
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Powerful Features</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Everything you need to manage tasks, track time, and analyze your productivity in one place
+              Everything you need to organize, focus, and boost productivity — all in one intuitive platform.
             </p>
           </div>
 
@@ -241,7 +166,7 @@ export const HomePage = () => {
               return (
                 <Card 
                   key={feature.id}
-                  className={`p-8 transition-all duration-300 cursor-pointer ${
+                  className={`p-6 transition-all duration-300 cursor-pointer ${
                     isHovered ? 'scale-105 shadow-lg' : 'hover:shadow-md'
                   }`}
                   onMouseEnter={() => setHoveredFeature(feature.id)}
