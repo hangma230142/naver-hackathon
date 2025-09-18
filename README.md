@@ -7,13 +7,12 @@
 ## 🚀 Project Setup & Usage
 **How to install and run your project:**  
 ✍️  
-Example (replace with your actual steps)  
-- `npm install`  
-- `npm start`
+Clone the repository
+Run npm install to install dependencies
+Run npm run dev to start the development server
 
 ## 🔗 Deployed Web URL or APK file
-✍️ [Paste your link here]
-
+https://naver-hackathon-p3oe.vercel.app/
 
 ## 🎥 Demo Video
 **Demo video link (≤ 2 minutes):**  
@@ -27,39 +26,41 @@ Example (replace with your actual steps)
 
 ## 💻 Project Introduction
 
-### a. Overview
+a. Overview
+DuckDoneList is a todolist application designed for students and individuals who want to manage their tasks more efficiently. The playful name “DuckDoneList” reflects the motivation to quickly finish the list of tasks instead of leaving them incomplete. The app not only supports daily task management but also helps users with time control and habit tracking.
 
-✍️ [Write your content here]
+b. Key Features & Function Manual
+Task Management: Users can create, edit, delete, and update task status (pending, in progress, completed). Tasks can be organized by category, priority level, or deadline.
 
-### b. Key Features & Function Manual
+Time Management: The app integrates a timer and supports the Pomodoro method, helping users stay focused for specific intervals with short breaks in between to recharge.
 
-✍️ [Write your content here, explain about your app's functions]
+Habit Tracking: Besides task management, users can track their daily learning and working habits. The app records repeated activities, which later form the basis for habit reports.
 
-### c. Unique Features (What’s special about this app?) 
+c. Unique Features (What’s special about this app?)
+DuckDoneList provides habit reports. It doesn’t just track tasks but also analyzes user behavior: which type of work takes up the most time, which activities are repeated the most, and how time is distributed. This gives users insights to improve their productivity and time allocation.
 
-✍️ [Write your content here]
+d. Technology Stack and Implementation Methods
+Frontend: Vite + React (TypeScript)
+UI: TailwindCSS for a clean and responsive design
+State Management: React Hooks + Context API
+Backend: Currently no dedicated backend, the app runs fully client-side
+Database / Storage: localStorage is used to store tasks, habits, and timers directly in the browser
+Deployment: Vercel - frontend Render - backend
 
-### d. Technology Stack and Implementation Methods
-
-✍️ [Write your content here]
-
-### e. Service Architecture & Database structure (when used)
-
-✍️ [Write your content here]
+e. Service Architecture & Database structure (when used)
+User interactions are handled on the React frontend. Data (tasks, habits, reports) is stored locally in localStorage. Reports are generated directly on the client side from the saved data
 
 ## 🧠 Reflection
 
-### a. If you had more time, what would you expand?
+a. If you had more time, what would you expand?
 
-✍️ [Write your content here]
+If given more time, I would expand DuckDoneList into a Project Management tool. Since it mainly targets university students, it could evolve into something like Notion but with built-in Pomodoro timers. This would allow not only personal task management but also group collaboration, project tracking, and academic deadline management.
 
+b. If you integrate AI APIs more for your app, what would you do?
+The habit tracking feature is where AI would shine:
 
-### b. If you integrate AI APIs more for your app, what would you do?
+Analyze user habits monthly to understand patterns and productivity
+Provide suggestions and tips for improvement, such as reducing time spent on non-priority tasks
+Deliver personalized reminders based on past behavior
+Auto-generate visual habit reports with insights for easier understanding of progress
 
-✍️ [Write your content here]
-
-
-## ✅ Checklist
-- [ ] Code runs without errors  
-- [ ] All required features implemented (add/edit/delete/complete tasks)  
-- [ ] All ✍️ sections are filled  
